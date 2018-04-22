@@ -88,6 +88,11 @@ namespace SMTPRouter.Windows.Configuration
         public SmtpConfiguration SmtpHost { get; private set; }
 
         /// <summary>
+        /// A string to store the queue path
+        /// </summary>
+        public string QueuePath { get; private set; }
+
+        /// <summary>
         /// A <see cref="Dictionary{TKey, TValue}"/> containing the Smtp Connections keyed by the Smtp Configuration Key defined on the <see cref="SmtpConfiguration.Key"/> property
         /// </summary>
         public Dictionary<string, SmtpConfiguration> SmtpConnections { get; private set; }
@@ -157,6 +162,14 @@ namespace SMTPRouter.Windows.Configuration
             {
                 if (bool.TryParse(tempuseSSL, out bool useSSL))
                     SmtpHost.UseSSL = useSSL;
+            }
+
+            if (TryFetchSetting(ref SmtpRouterConfiguration, "QueuePath", out string tempQueuePath))
+            {
+                if (string.IsNullOrEmpty(tempQueuePath))
+                    throw new Exception($"The '{nameof(QueuePath)}' is empty");
+                else
+                    QueuePath = tempQueuePath;
             }
 
             // Validate the Destination Smtp Configuration
