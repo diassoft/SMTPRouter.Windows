@@ -155,7 +155,9 @@ Now, setup the Routing Rules to be checked when processing a message. Use the `<
 </RoutingRulesConfiguration>
 ```
 
-A Routing Rule is a class that derives from the `RoutingRule` base class. Therefore, the system cannot now what kinds of routing rules to expect. 
+A Routing Rule is a class that derives from the `RoutingRule` base class. Therefore, the system cannot tell what kind of routing rules to expect. 
+You have to inform the `type` attribute as the example below, with the Full Name and the Assembly name.
+
 The table below explain how to setup the XML properly:
 
 | Attribute | Usage |

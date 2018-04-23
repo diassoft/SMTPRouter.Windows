@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Diassoft")]
 [assembly: AssemblyProduct("SMTPRouter.Windows")]
 [assembly: AssemblyCopyright("© 2018 Diassoft Corporation")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Diassoft")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

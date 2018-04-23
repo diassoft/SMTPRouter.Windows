@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SMTPRouter.Windows</id>
+    <version>1.0.0.2</version>
+    <title>SMTPRouter.Windows Component</title>
+    <authors>Olavo Henrique Dias</authors>
+    <owners>Olavo Henrique Dias</owners>
+    <licenseUrl>https://raw.githubusercontent.com/diassoft/SMTPRouter.Windows/dev/LICENSE.MD</licenseUrl>
+    <projectUrl>https://github.com/diassoft/SMTPRouter.Windows</projectUrl>
+    <iconUrl>https://github.com/diassoft/Branding/blob/master/Nuget-Package-Icon-v01.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="Public" url="https://github.com/diassoft/SMTPRouter.Windows" />
+    <description>A package containing .NET Framework specific components to use in conjunction with the SMTPRouter package. With this package you can use the App.Config file to configure your SMTP Router.</description>
+    <releaseNotes>This package contains .NET Framework specific components to use in conjunction with the SMTPRouter package</releaseNotes>
+    <copyright>© 2018 Diassoft Corporation</copyright>
+    <tags>Diassoft SMTP Router Server SmtpRouter Listen Messages Listener Relay SMTPRelay</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="Diassoft.Mvvm" version="1.0.0.4" exclude="Build,Analyzers" />
+        <dependency id="MailKit" version="2.0.3" exclude="Build,Analyzers" />
+        <dependency id="MimeKit" version="2.0.3" exclude="Build,Analyzers" />
+        <dependency id="SmtpServer" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Linq" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="SMTPRouter" version="1.0.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\*.dll" target="lib\net461" />
+    <file src="bin\$configuration$\*.pdb" target="lib\net461" />
+    <file src="bin\$configuration$\*.xml" target="lib\net461" />
+  </files>
+</package>
