@@ -93,6 +93,18 @@ namespace SMTPRouter.Windows.Configuration
         public string QueuePath { get; private set; }
 
         /// <summary>
+        /// The time a message is considered valid to retry. By default it is 15 minutes.
+        /// </summary>
+        /// <remarks>Once the <see cref="MessageLifespan"/> expires, the message is no longer sent to the RetryQueue, instead it is sent to the ErrorQueue</remarks>
+        public TimeSpan MessageLifespan { get; set; }
+
+        /// <summary>
+        /// The time a message is considered not purgeable. By default it is 90 days.
+        /// </summary>
+        /// <remarks>Messages older than the <see cref="MessagePurgeLifespan"/> are deleted from the server</remarks>
+        public TimeSpan MessagePurgeLifespan { get; set; }
+
+        /// <summary>
         /// A <see cref="Dictionary{TKey, TValue}"/> containing the Smtp Connections keyed by the Smtp Configuration Key defined on the <see cref="SmtpConfiguration.Key"/> property
         /// </summary>
         public Dictionary<string, SmtpConfiguration> SmtpConnections { get; private set; }
@@ -170,6 +182,44 @@ namespace SMTPRouter.Windows.Configuration
                     throw new Exception($"The '{nameof(QueuePath)}' is empty");
                 else
                     QueuePath = tempQueuePath;
+            }
+
+            // Message Lifespan and Message Purge Lifespan
+            MessageLifespan = new TimeSpan(0, 15, 0);
+            MessagePurgeLifespan = new TimeSpan(90, 0, 0, 0);
+            foreach (var name in (from n in SmtpRouterConfiguration.Settings.AllKeys where n.ToUpper().StartsWith("MESSAGELIFESPAN") || n.ToUpper().StartsWith("MESSAGEPURGELIFESPAN") select n))
+            {
+                // Ensure the value is valid
+                if (double.TryParse(SmtpRouterConfiguration.Settings[name].Value, out double tempLifespan))
+                {
+                    var messageLifespanArray = name.Split('-');
+                    if (messageLifespanArray.Length == 2)
+                    {
+                        // Check for a Property with the give name
+                        PropertyInfo pi = this.GetType().GetProperty(messageLifespanArray[0], BindingFlags.Instance | BindingFlags.Public);
+                        if (pi == null)
+                            throw new Exception($"There is no property named '{messageLifespanArray[0]}' on the '{nameof(ConfigFileParser)}' class");
+
+                        // Check for a Method (FromMinutes, FromDays, FromSeconds, etc)
+                        MethodInfo mi = typeof(TimeSpan).GetMethod($"From{messageLifespanArray[1]}", BindingFlags.Static | BindingFlags.Public);
+                        if (mi == null)
+                            throw new Exception($"There is not a static method 'From{messageLifespanArray[1]}' on the TimeSpan object. Use Days, Minutes, Seconds, Milliseconds or Ticks.");
+
+                        // Creates the TimeSpan Dynamically
+                        TimeSpan t = (TimeSpan)mi.Invoke(null, new object[] { tempLifespan });
+                        
+                        // Assign it to the property
+                        pi.SetValue(this, t);
+                    }
+                    else
+                    {
+                        throw new Exception($"The property should be setup accordingly to the following structure: '[PropertyName]-[Time]', where [PropertyName] should be a valid property on the '{nameof(ConfigFileParser)}' class and [Time] should be 'Days', 'Hours', 'Minutes', 'Seconds' or 'Milliseconds'");
+                    }
+                }
+                else
+                {
+                    throw new Exception($"The property '{name}' must be set to a numeric value");
+                }
             }
 
             // Validate the Destination Smtp Configuration

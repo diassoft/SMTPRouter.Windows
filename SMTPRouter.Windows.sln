@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPRouter.Windows", "SMTPR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPRouter.Windows.Test", "SMTPRouter.Windows.Test\SMTPRouter.Windows.Test.csproj", "{BE2C6A45-D4D1-4C8A-8C7C-A43CAF998D7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMTPRouter.Windows.ServiceHost", "SMTPRouter.Windows.ServiceHost\SMTPRouter.Windows.ServiceHost.csproj", "{7A9287BC-E543-4301-88D9-45980355D0A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F4F6138-3401-4FE9-A43B-555683ACFA70}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.MD = LICENSE.MD
+		README.MD = README.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,10 @@ Global
 		{BE2C6A45-D4D1-4C8A-8C7C-A43CAF998D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE2C6A45-D4D1-4C8A-8C7C-A43CAF998D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE2C6A45-D4D1-4C8A-8C7C-A43CAF998D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9287BC-E543-4301-88D9-45980355D0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9287BC-E543-4301-88D9-45980355D0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9287BC-E543-4301-88D9-45980355D0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9287BC-E543-4301-88D9-45980355D0A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

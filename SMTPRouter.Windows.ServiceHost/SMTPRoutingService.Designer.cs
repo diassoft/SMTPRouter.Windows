@@ -1,4 +1,4 @@
-﻿namespace SMTPRouter.Windows.Services
+﻿namespace SMTPRouter.Windows.ServiceHost
 {
     partial class SMTPRoutingService
     {

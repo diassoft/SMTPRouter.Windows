@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMTPRouter.Windows.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,18 +9,11 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SMTPRouter;
-using SMTPRouter.Windows.Configuration;
 
-namespace SMTPRouter.Windows.Services
+namespace SMTPRouter.Windows.ServiceHost
 {
-    /// <summary>
-    /// Represents a Smtp Routing Service Implementation
-    /// </summary>
-    public partial class SMTPRoutingService : ServiceBase
+    partial class SMTPRoutingService : ServiceBase
     {
-        private const string EventLogSourceName = "";
-
         /// <summary>
         /// The cancellation token to control the asynchronous tasks
         /// </summary>
@@ -30,7 +24,9 @@ namespace SMTPRouter.Windows.Services
         /// </summary>
         public SMTPRoutingService()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            this.CanPauseAndContinue = false;
         }
 
         /// <summary>
@@ -53,7 +49,7 @@ namespace SMTPRouter.Windows.Services
                 {
                     MessageLifespan = new TimeSpan(0, 15, 0),
                 };
-                
+
                 foreach (var smtp in parser.SmtpConnections)
                     server.DestinationSmtps.Add(smtp.Key, smtp.Value);
 
@@ -139,7 +135,7 @@ namespace SMTPRouter.Windows.Services
                 }
 
                 this.EventLog.WriteEntry(sb.ToString(), EventLogEntryType.Error);
-                
+
                 // Changes the ExitCode to inform the SCM that the service failed
                 this.ExitCode = 1;
             }
