@@ -86,6 +86,15 @@ namespace SMTPRouter.Windows.Configuration
         }
 
         /// <summary>
+        /// The SecureSocketOption (0 = None, 1 = Auto, 2 = SslOnConnect, 3 = StartTls, 4 = StartTlsWhenAvailable
+        /// </summary>
+        [ConfigurationProperty("secureSocketOption", DefaultValue = 1)]
+        public int SecureSocketOption
+        {
+            get { return (int)this["secureSocketOption"]; }
+        }
+
+        /// <summary>
         /// Returns a string with the information regarding the SMTP Connection
         /// </summary>
         /// <returns></returns>
@@ -98,7 +107,8 @@ namespace SMTPRouter.Windows.Configuration
                    $"Use SSL........: {this.UseSSL}\n" +
                    $"Auth Required..: {this.RequiresAuthentication}\n" +
                    $"User...........: {this.User}\n" +
-                   $"Password.......: {this.Password}";
+                   $"Password.......: {this.Password}\n" +
+                   $"Secure Socket..: {this.SecureSocketOption}";
         }
     }
 }

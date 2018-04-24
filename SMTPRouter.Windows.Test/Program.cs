@@ -53,6 +53,7 @@ namespace SMTPRouter.Windows.Test
                     Console.WriteLine($"            Use SSL..........: {((SmtpConfiguration)c.Value).UseSSL.ToString()}");
                     Console.WriteLine($"            User.............: {((SmtpConfiguration)c.Value).User}");
                     Console.WriteLine($"            Password.........: {((SmtpConfiguration)c.Value).Password}");
+                    Console.WriteLine($"            Secure Socket....: {((SmtpConfiguration)c.Value).SecureSocketOption}");
 
                     Console.WriteLine();
                 }
