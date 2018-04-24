@@ -1,4 +1,4 @@
-# SmtpRouter.Windows Components - v1.0.0.2
+# SmtpRouter.Windows Components - v1.0.0.3
 [![nuget](https://img.shields.io/nuget/v/SmtpRouter.Windows.svg)](https://www.nuget.org/packages/SmtpRouter.Windows/) 
 ![GitHub release](https://img.shields.io/github/release/diassoft/SmtpRouter.Windows.svg)
 ![NuGet](https://img.shields.io/nuget/dt/SmtpRouter.Windows.svg)
@@ -121,17 +121,31 @@ Now, setup the SMTPs where the messages could be routed to, by using the `<SmtpC
          port="587"
          requiresAuthentication="true"
          user="user"
-         password="pwd"/>
+         password="pwd"
+         secureSocketOption="1"/>
     <add key="hotmail"
          description="Hotmail SMTP Server"
          host="smtp.live.com"
          port="587"
          requiresAuthentication="true"
          user="user"
-         password="pwd"/>
+         password="pwd"
+         secureSocketOption="1"/>
   </SmtpConnections>
 </SmtpConfiguration>
 ```
+
+The `secureSocketOption` attribute accept the following values:
+
+| Value | Description | Usage |
+| :--- | :--- | :--- |
+| `0` | `None` | No SSL or TLS encryption should be used |
+| `1` | `Auto` | The system will decide whether to use SSL or TLS |
+| `2` | `SslOnConnect` | The connection should use SSL or TLS encryption immediately |
+| `3` | `StartTls` | Elevates the connection to use TLS encryption immediatelly after reading the greeting a server capabilities |
+| `4` | `StartTlsWhenAvailable` | Elevates the connection to use TLS encryption immediatelly after reading the greeting a server capabilities, but only if the server supports that |
+
+For more information about the parameters available, refer to the [SmtpConfigurationElement](https://diassoft.github.io/SMTPRouter/html/T_SMTPRouter_Windows_Configuration_SmtpConnectionElement.htm) on the documentation.
 
 #### Routing Rules Configuration
 Now, setup the Routing Rules to be checked when processing a message. Use the `<RoutingRulesConfiguration>` tag and add one or many `RoutingRule` inside the `<RoutingRules>` tag.

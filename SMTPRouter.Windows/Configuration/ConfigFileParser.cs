@@ -239,7 +239,8 @@ namespace SMTPRouter.Windows.Configuration
                         RequiresAuthentication = e.RequiresAuthentication,
                         UseSSL = e.UseSSL,
                         User = e.User,
-                        Password = e.Password
+                        Password = e.Password,
+                        SecureSocketOption = e.SecureSocketOption
                     };
 
                     this.SmtpConnections.Add(tempSmtpConnection.Key, tempSmtpConnection);

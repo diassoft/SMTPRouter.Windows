@@ -59,6 +59,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>smtprouter_icon_256x256_iL5_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -73,8 +76,8 @@
       <HintPath>..\packages\MimeKit.2.0.3\lib\net45\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="SMTPRouter, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SMTPRouter.1.0.0.2\lib\net461\SMTPRouter.dll</HintPath>
+    <Reference Include="SMTPRouter, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SMTPRouter.1.0.0.3\lib\net461\SMTPRouter.dll</HintPath>
     </Reference>
     <Reference Include="SmtpServer, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SmtpServer.5.0.0\lib\net45\SmtpServer.dll</HintPath>
@@ -135,6 +138,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="smtprouter_icon_256x256_iL5_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
