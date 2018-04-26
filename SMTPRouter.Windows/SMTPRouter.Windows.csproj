@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SMTPRouter.Windows.1.0.0.5.nuspec" />
     <None Include="SMTPRouter.Windows.1.0.0.4.nuspec" />
     <None Include="SMTPRouter.Windows.1.0.0.3.nuspec" />
     <None Include="SMTPRouter.Windows.1.0.0.2.nupkg" />
