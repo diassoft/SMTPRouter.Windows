@@ -1,4 +1,4 @@
-# SmtpRouter.Windows Components - v1.0.0.3
+# SmtpRouter.Windows Components - v1.0.0.5
 [![nuget](https://img.shields.io/nuget/v/SmtpRouter.Windows.svg)](https://www.nuget.org/packages/SmtpRouter.Windows/) 
 ![GitHub release](https://img.shields.io/github/release/diassoft/SmtpRouter.Windows.svg)
 ![NuGet](https://img.shields.io/nuget/dt/SmtpRouter.Windows.svg)
