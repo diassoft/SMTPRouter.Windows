@@ -138,6 +138,7 @@ namespace SMTPRouter.Windows.ServiceHost
 
                 // Changes the ExitCode to inform the SCM that the service failed
                 this.ExitCode = 1;
+                this.Stop();
             }
         }
 
