@@ -76,8 +76,8 @@
       <HintPath>..\packages\MimeKit.2.0.3\lib\net45\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="SMTPRouter, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SMTPRouter.1.0.0.7\lib\net461\SMTPRouter.dll</HintPath>
+    <Reference Include="SMTPRouter, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SMTPRouter.2.2.0\lib\net461\SMTPRouter.dll</HintPath>
     </Reference>
     <Reference Include="SmtpServer, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SmtpServer.5.0.0\lib\net45\SmtpServer.dll</HintPath>

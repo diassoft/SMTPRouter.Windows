@@ -240,7 +240,9 @@ namespace SMTPRouter.Windows.Configuration
                         UseSSL = e.UseSSL,
                         User = e.User,
                         Password = e.Password,
-                        SecureSocketOption = e.SecureSocketOption
+                        SecureSocketOption = e.SecureSocketOption,
+                        ActiveConnections = e.ActiveConnections,
+                        GroupingOption = (FileGroupingOptions)e.GroupingOption
                     };
 
                     this.SmtpConnections.Add(tempSmtpConnection.Key, tempSmtpConnection);
