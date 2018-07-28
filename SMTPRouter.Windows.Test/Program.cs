@@ -47,13 +47,15 @@ namespace SMTPRouter.Windows.Test
                 {
                     Console.WriteLine($"Key.......: {c.Key}");
                     Console.WriteLine($"Value.....: {c.Value.ToString()}");
-                    Console.WriteLine($"            Host.............: {((SmtpConfiguration)c.Value).Host}");
-                    Console.WriteLine($"            Port.............: {((SmtpConfiguration)c.Value).Port.ToString()}");
-                    Console.WriteLine($"            Authentication...: {((SmtpConfiguration)c.Value).RequiresAuthentication.ToString()}");
-                    Console.WriteLine($"            Use SSL..........: {((SmtpConfiguration)c.Value).UseSSL.ToString()}");
-                    Console.WriteLine($"            User.............: {((SmtpConfiguration)c.Value).User}");
-                    Console.WriteLine($"            Password.........: {((SmtpConfiguration)c.Value).Password}");
-                    Console.WriteLine($"            Secure Socket....: {((SmtpConfiguration)c.Value).SecureSocketOption}");
+                    Console.WriteLine($"            Host.................: {((SmtpConfiguration)c.Value).Host}");
+                    Console.WriteLine($"            Port.................: {((SmtpConfiguration)c.Value).Port.ToString()}");
+                    Console.WriteLine($"            Authentication.......: {((SmtpConfiguration)c.Value).RequiresAuthentication.ToString()}");
+                    Console.WriteLine($"            Use SSL..............: {((SmtpConfiguration)c.Value).UseSSL.ToString()}");
+                    Console.WriteLine($"            User.................: {((SmtpConfiguration)c.Value).User}");
+                    Console.WriteLine($"            Password.............: {((SmtpConfiguration)c.Value).Password}");
+                    Console.WriteLine($"            Secure Socket........: {((SmtpConfiguration)c.Value).SecureSocketOption}");
+                    Console.WriteLine($"            Active Connections...: {((SmtpConfiguration)c.Value).ActiveConnections}");
+                    Console.WriteLine($"            Grouping Option......: {((SmtpConfiguration)c.Value).GroupingOption}");
 
                     Console.WriteLine();
                 }

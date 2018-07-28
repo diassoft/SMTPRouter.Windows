@@ -1,4 +1,4 @@
-# SmtpRouter.Windows Components - v1.0.0.5
+# SmtpRouter.Windows Components - v2.6.0.0
 [![nuget](https://img.shields.io/nuget/v/SmtpRouter.Windows.svg)](https://www.nuget.org/packages/SmtpRouter.Windows/) 
 ![GitHub release](https://img.shields.io/github/release/diassoft/SmtpRouter.Windows.svg)
 ![NuGet](https://img.shields.io/nuget/dt/SmtpRouter.Windows.svg)
@@ -9,6 +9,8 @@ The SMTP Router is a intermediate SMTP server useful to intercept messages and r
 Refer to the [SMTP Router](https://github.com/diassoft/SMTPRouter) repository to get more information about the project.
 
 This repository contains additional components for the SMTPRouter project. Those components are only to be used on .NET Framework Implementations, therefore, they are Windows only. Check the [In this repository](#in-this-repository) section to see what is distributed with this component.
+
+>You may need to rebuild some of your code when migrating to **major version 2**.
 
 >If you wish to contact the creator of this component, you can make it thru the [Nuget.org](https://www.nuget.org/packages/SmtpRouter.Windows/) page or by email [olavodias@gmail.com](mailto:olavodias@gmail.com).
 

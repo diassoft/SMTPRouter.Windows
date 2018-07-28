@@ -86,7 +86,7 @@ namespace SMTPRouter.Windows.Configuration
         }
 
         /// <summary>
-        /// The SecureSocketOption (0 = None, 1 = Auto, 2 = SslOnConnect, 3 = StartTls, 4 = StartTlsWhenAvailable
+        /// The SecureSocketOption (0 = None, 1 = Auto, 2 = SslOnConnect, 3 = StartTls, 4 = StartTlsWhenAvailable)
         /// </summary>
         [ConfigurationProperty("secureSocketOption", DefaultValue = 1)]
         public int SecureSocketOption
@@ -95,20 +95,40 @@ namespace SMTPRouter.Windows.Configuration
         }
 
         /// <summary>
+        /// The Number of Active Connections with the Smtp
+        /// </summary>
+        [ConfigurationProperty("activeConnections", DefaultValue = 1)]
+        public int ActiveConnections
+        {
+            get { return (int)this["activeConnections"]; }
+        }
+
+        /// <summary>
+        /// The Number of Active Connections with the Smtp (0 = No Gouping, 1 = Group by Date, 2 = Group by Date and Hour)
+        /// </summary>
+        [ConfigurationProperty("groupingOption", DefaultValue = 0)]
+        public int GroupingOption
+        {
+            get { return (int)this["groupingOption"]; }
+        }
+
+        /// <summary>
         /// Returns a string with the information regarding the SMTP Connection
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Key............: {this.Key}\n" +
-                   $"Description....: {this.Description}\n" +
-                   $"Host...........: {this.Host}\n" +
-                   $"Port...........: {this.Port.ToString()}\n" +
-                   $"Use SSL........: {this.UseSSL}\n" +
-                   $"Auth Required..: {this.RequiresAuthentication}\n" +
-                   $"User...........: {this.User}\n" +
-                   $"Password.......: {this.Password}\n" +
-                   $"Secure Socket..: {this.SecureSocketOption}";
+            return $"Key.................: {this.Key}\n" +
+                   $"Description.........: {this.Description}\n" +
+                   $"Host................: {this.Host}\n" +
+                   $"Port................: {this.Port.ToString()}\n" +
+                   $"Use SSL.............: {this.UseSSL}\n" +
+                   $"Auth Required.......: {this.RequiresAuthentication}\n" +
+                   $"User................: {this.User}\n" +
+                   $"Password............: {this.Password}\n" +
+                   $"Secure Socket.......: {this.SecureSocketOption}\n" +
+                   $"Active Connections..: {this.ActiveConnections}\n" +
+                   $"Grouping Option.....: {this.GroupingOption}";
         }
     }
 }
