@@ -30,6 +30,7 @@ namespace SMTPRouter.Windows.Configuration
     ///           params="RegexExpression=\A[Uu](\d{5})\z"
     ///           smtpkey="hotmail" />
     ///    </RoutingRules>
+    ///  </RoutingRulesConfiguration>
     /// ]]>
     /// </code>
     /// </example>

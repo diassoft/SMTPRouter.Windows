@@ -77,6 +77,23 @@ namespace SMTPRouter.Windows.Test
 
                     Console.WriteLine();
                 }
+
+                // List Accepted IP Addresses
+                Console.WriteLine("Accepted IP Addresses");
+                Console.WriteLine("--------------------------------------------------------------");
+                foreach (var c in helper.AcceptedIPAddresses)
+                    Console.WriteLine($"IP........: {c}");
+
+                Console.WriteLine();
+
+                // List Rejected IP Addresses
+                Console.WriteLine("Rejected IP Addresses");
+                Console.WriteLine("--------------------------------------------------------------");
+                foreach (var c in helper.RejectedIPAddresses)
+                    Console.WriteLine($"IP........: {c}");
+
+                Console.WriteLine();
+
             }
             catch (Exception e)
             {

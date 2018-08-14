@@ -115,6 +115,16 @@ namespace SMTPRouter.Windows.Configuration
         public List<RoutingRule> RoutingRules { get; private set; }
 
         /// <summary>
+        /// A <see cref="List{T}"/> of <see cref="string"/> containing all the accepted ip addresses
+        /// </summary>
+        public List<string> AcceptedIPAddresses { get; private set; }
+
+        /// <summary>
+        /// A <see cref="List{T}"/> of <see cref="string"/> containing all the rejected ip addresses
+        /// </summary>
+        public List<string> RejectedIPAddresses { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ConfigFileParser"/>
         /// </summary>
         /// <remarks>This constructor passes the default App.Config as the <see cref="System.Configuration.Configuration"/></remarks>
@@ -138,6 +148,8 @@ namespace SMTPRouter.Windows.Configuration
             string section_SmtpRouter = "SmtpRouterConfiguration";
             string section_SmtpConfiguration = "SmtpConfiguration";
             string section_RoutingRulesConfiguration = "RoutingRulesConfiguration";
+            string section_AcceptedIPAddressesConfiguration = "AcceptedIPAddressesConfiguration";
+            string section_RejectedIPAddressesConfiguration = "RejectedIPAddressesConfiguration";
 
             // Validate the SmtpRouter Configuration
             var SmtpRouterConfiguration = config.GetSection(section_SmtpRouter) as NameValueSection;
@@ -306,6 +318,33 @@ namespace SMTPRouter.Windows.Configuration
                     RoutingRules.Add(routingRule);
                 }
             }
+
+            // Validate Accepted IP Addresses
+            var AcceptedIPAddressesConfiguration = config.GetSection(section_AcceptedIPAddressesConfiguration) as IPAddressesSection;
+            this.AcceptedIPAddresses = new List<string>();
+
+            if (AcceptedIPAddressesConfiguration != null)
+            {
+                foreach (var ipAddress in AcceptedIPAddressesConfiguration.IPAddresses)
+                {
+                    if (ipAddress is IPAddressElement ipAddressElement)
+                        this.AcceptedIPAddresses.Add(ipAddressElement.Address.Trim());
+                }
+            }
+
+            // Validate Accepted IP Addresses
+            var RejectedIPAddressesConfiguration = config.GetSection(section_RejectedIPAddressesConfiguration) as IPAddressesSection;
+            this.RejectedIPAddresses = new List<string>();
+
+            if (RejectedIPAddressesConfiguration != null)
+            {
+                foreach (var ipAddress in RejectedIPAddressesConfiguration.IPAddresses)
+                {
+                    if (ipAddress is IPAddressElement ipAddressElement)
+                        this.RejectedIPAddresses.Add(ipAddressElement.Address.Trim());
+                }
+            }
+
         }
 
         /// <summary>
