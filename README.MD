@@ -1,4 +1,4 @@
-# SmtpRouter.Windows Components - v2.6.0.0
+# SmtpRouter.Windows Components - v2.7.0
 [![nuget](https://img.shields.io/nuget/v/SmtpRouter.Windows.svg)](https://www.nuget.org/packages/SmtpRouter.Windows/) 
 ![GitHub release](https://img.shields.io/github/release/diassoft/SmtpRouter.Windows.svg)
 ![NuGet](https://img.shields.io/nuget/dt/SmtpRouter.Windows.svg)
@@ -16,7 +16,7 @@ This repository contains additional components for the SMTPRouter project. Those
 
 ## In this repository
 
-* [SMTP Router Documentation](https://diassoft.github.io/SMTPRouter)
+* [SMTP Router Documentation](https://diassoft.github.io/SMTPRouter_v2000/index.html)
 * [What is Distributed](#what-is-distributed)
 * [How To Use It](#how-to-use-it)
     * [Prerequisites](#prerequisites)
@@ -24,7 +24,8 @@ This repository contains additional components for the SMTPRouter project. Those
     * [Sections](#configuration-sections)
     * [Smtp Hosting Configuration](#smtp-hosting-configuration)
     * [Destination Smtps Configuration](#destination-smtps-configuration)
-    * [Routing Rulkes Configuration](#routing-rules-configuration)
+    * [Routing Rules Configuration](#routing-rules-configuration)
+    * [Accepted and Rejected IP Addresses Configuration](#accepted-and-rejected-ip-addresses-configuration)
     * [Parsing the configuration file](#parsing-the-configuration-file)
 * [Using as a Windows Service](#using-as-a-windows-service)
 
@@ -40,11 +41,14 @@ The components distributed on this project are:
 | `RoutingRuleElement` | A `ConfigurationElement` that allow custom tags to be added to configuration files such as `App.Config`, `Machine.Config` or `Web.Config` files. |
 | `RoutingRuleCollection` | A `ConfigurationElementCollection` that allow multiple instances of `RoutingRuleElement` to be added in a configuration file. |
 | `RoutingRulesSection` | A `ConfigurationSection` that allow the creation of a `<RoutingRules/>` tag in the configuration file. |
+| `IPAddressElement` | A `ConfigurationElement` that allow custom tags to be added to configuration files such as `App.Config`, `Machine.Config` or `Web.Config` files. |
+| `IPAddressesCollection` | A `ConfigurationElementCollection` that allow multiple instances of `IPAddressElement` to be added in a configuration file. |
+| `IPAddressesSection` | A `ConfigurationSection` that allow the creation of a `<IPAddresses/>` tag in the configuration file. |
 | `ConfigFileParser` | A helper class that will parse a configuration file and return the data in a understandable way |
 
 Those components are listed inside the `SMTPRouter.Windows.Configuration` namespace. 
 
-For more information, refer to the [SMTPRouter.Windows.Configuration Namespace](https://diassoft.github.io/SMTPRouter/html/N_SMTPRouter_Windows_Configuration.htm) on the documentation.
+For more information, refer to the [SMTPRouter.Windows.Configuration Namespace](https://diassoft.github.io/SMTPRouter_v2000/html/N_SMTPRouter_Windows_Configuration.htm) on the documentation.
 
 This repository also contains a project named **System.Windows.ServiceHost** which shows an implementation of the `SMTPRouter` component as a windows service. 
 You can install it and configure the `App.Config` file in very few steps to have a intermediate Smtp routing messages for you.
@@ -68,6 +72,7 @@ In order to use the `SMTPRouter.Windows` configuration file helper, you need to 
 
 #### Configuration Sections
 First, configure the sections that will be diplayed for configuration:
+
 ```xml
 <configSections>
     <section name="SmtpRouterConfiguration"
@@ -76,6 +81,10 @@ First, configure the sections that will be diplayed for configuration:
              type="SMTPRouter.Windows.Configuration.SmtpConnectionsSection, SMTPRouter.Windows"/>
     <section name="RoutingRulesConfiguration"
              type="SMTPRouter.Windows.Configuration.RoutingRulesSection, SMTPRouter.Windows"/>
+    <section name="AcceptedIPAddressesConfiguration"
+              type="SMTPRouter.Windows.Configuration.IPAddressesSection, SMTPRouter.Windows"/>
+    <section name="RejectedIPAddressesConfiguration"
+              type="SMTPRouter.Windows.Configuration.IPAddressesSection, SMTPRouter.Windows"/>
 </configSections>
 ```
 
@@ -147,7 +156,7 @@ The `secureSocketOption` attribute accept the following values:
 | `3` | `StartTls` | Elevates the connection to use TLS encryption immediatelly after reading the greeting a server capabilities |
 | `4` | `StartTlsWhenAvailable` | Elevates the connection to use TLS encryption immediatelly after reading the greeting a server capabilities, but only if the server supports that |
 
-For more information about the parameters available, refer to the [SmtpConfigurationElement](https://diassoft.github.io/SMTPRouter/html/T_SMTPRouter_Windows_Configuration_SmtpConnectionElement.htm) on the documentation.
+For more information about the parameters available, refer to the [SmtpConfigurationElement](https://diassoft.github.io/SMTPRouter_v2000/html/T_SMTPRouter_Windows_Configuration_SmtpConnectionElement.htm) on the documentation.
 
 #### Routing Rules Configuration
 Now, setup the Routing Rules to be checked when processing a message. Use the `<RoutingRulesConfiguration>` tag and add one or many `RoutingRule` inside the `<RoutingRules>` tag.
@@ -187,6 +196,40 @@ When using the `params` attribute, use the following syntax: `[PropertyName]=[Pr
 
 > The `PropertyName` is case sensitive. When reading it with the `ConfigFileParser` object, the system will validate if the `PropertyName` has a setter and, if not, an `Exception` will thrown.
 
+#### Accepted and Rejected IP Addresses Configuration
+You can define that messages will only be accepted from certain ip addresses, or reject incoming messages from certain IP addresses. 
+Use the `<AcceptedIPAddressesConfiguration>` and/or `<RejectedIPAddressesConfiguration>` tag and add one or many IP Addresses inside the `<IPAddresses>` tag.
+
+```xml
+<AcceptedIPAddressesConfiguration>
+  <IPAddresses>
+    <add address="127.0.0.1" />
+  </IPAddresses>
+</AcceptedIPAddressesConfiguration>
+
+<RejectedIPAddressesConfiguration>
+  <IPAddresses>
+    <add address="127.0.0.2" />
+  </IPAddresses>
+</RejectedIPAddressesConfiguration>
+```
+
+If you do not want to add any ip address to any of the collections, you can just not add any of the configuration sections to your app.config file.
+
+Optionally you can use the following syntax:
+
+```xml
+<!-- The syntax below generates an empty list -->
+<AcceptedIPAddressesConfiguration>
+  <IPAddresses/>
+</AcceptedIPAddressesConfiguration>
+
+<!-- Another way to generate an empty list -->
+<RejectedIPAddressesConfiguration/>
+```
+
+>Be aware that when you add an entry to the `AcceptedIPAddressesConfiguration`, only messages coming from the IP address listed on the configuration will be accepted. Any other IP address will be rejected. If the list is empty, then all senders will be accepted unless the are on the `RejectedIPAddressesConfiguration`.
+
 #### Parsing the configuration file
 
 Now you can use the `ConfigFileParser` to read the configuration file and return the properties you need.
@@ -213,8 +256,10 @@ The `ConfigFileParser` will return the information you need on its Properties an
 | `MessagePurgeLifespan` | A `TimeSpan` that defines how long a message lasts until it is considered obsolete. The `Router` component of the `SMTPRouter` will purge the records automatically. |
 | `SmtpConnections` | A `Dictionary<string, SmtpConfiguration>` showing all the Smtp Connections setup on the `<SmtpConfiguration>` section |
 | `RoutingRules` | A `List<RoutingRule>` showing all the rules setup on the `<RoutingRulesConfiguration>` section |
+| `AcceptedIPAddresses` | A `List<string>` showing all the IP Addresses from the `<AcceptedIPAddressesConfiguration>` section |
+| `RejectedIPAddresses` | A `List<string>` showing all the IP Addresses from the `<RejectedIPAddressesConfiguration>` section |
 
-For more information, refer to the [ConfigFileParser](https://diassoft.github.io/SMTPRouter/html/T_SMTPRouter_Windows_Configuration_ConfigFileParser.htm) on the documentation.
+For more information, refer to the [ConfigFileParser](https://diassoft.github.io/SMTPRouter_v2000/html/T_SMTPRouter_Windows_Configuration_ConfigFileParser.htm) on the documentation.
 
 ## Using as a Windows Service
 

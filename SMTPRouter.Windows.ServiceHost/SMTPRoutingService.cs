@@ -56,6 +56,12 @@ namespace SMTPRouter.Windows.ServiceHost
                 foreach (var routingRule in parser.RoutingRules)
                     server.RoutingRules.Add(routingRule);
 
+                foreach (var ipAddress in parser.AcceptedIPAddresses)
+                    server.Router.AcceptedIPAddresses.Add(ipAddress);
+
+                foreach (var ipAddress in parser.RejectedIPAddresses)
+                    server.Router.RejectedIPAddresses.Add(ipAddress);
+
                 // Initialize Services
                 Task.WhenAll(server.StartAsync(CancellationToken.Token)).ConfigureAwait(false);
 
